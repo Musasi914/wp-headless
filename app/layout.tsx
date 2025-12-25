@@ -4,6 +4,7 @@ import "./globals.css";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { TITLE } from "@/config";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,17 +19,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className="dark">
+    <html lang="ja" suppressHydrationWarning>
       <body className={`${inter.className} antialiased min-h-screen`}>
-        <header className="px-8">
-          <Button variant="ghost" asChild>
-            <Link href="/">{TITLE}</Link>
-          </Button>
-        </header>
-        <main className="w-11/12 max-w-6xl mx-auto py-8">{children}</main>
-        <footer className="text-center py-2 sticky top-full">
-          &copy; 2025 {TITLE}
-        </footer>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <header className="px-8">
+            <Button variant="ghost" asChild>
+              <Link href="/">{TITLE}</Link>
+            </Button>
+          </header>
+          <main className="w-11/12 max-w-6xl mx-auto py-8">{children}</main>
+          <footer className="text-center py-2 sticky top-full">
+            &copy; 2025 {TITLE}
+          </footer>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -12,7 +12,7 @@ export default async function page() {
       <h1 className="font-bold text-2xl mb-8">記事一覧</h1>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {posts.map((post) => (
+        {posts.map((post, index) => (
           <Card key={post.id} className="relative">
             <CardHeader>
               {post.jetpack_featured_media_url ? (
@@ -20,8 +20,10 @@ export default async function page() {
                   <Image
                     src={post.jetpack_featured_media_url ?? ""}
                     alt={post.title.rendered}
-                    fill
+                    fill={true}
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover"
+                    preload={index < 3 ? true : false}
                   />
                 </div>
               ) : null}

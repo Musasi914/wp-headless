@@ -1,4 +1,3 @@
-import PostsList from "@/components/PostsList";
 import { searchPosts } from "../posts/data";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";

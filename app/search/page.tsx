@@ -24,7 +24,7 @@ export default async function Search({
               <CardHeader>
                 <CardTitle>
                   <h2>
-                    <Link href={post.url}>
+                    <Link href={`/posts/${post.id}`}>
                       {post.title}
                       <span className="absolute inset-0"></span>
                     </Link>

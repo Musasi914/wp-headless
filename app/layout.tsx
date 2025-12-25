@@ -5,6 +5,13 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { TITLE } from "@/config";
 import { ThemeProvider } from "@/components/theme-provider";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group";
+import { Search } from "lucide-react";
+import { redirect } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,10 +34,31 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <header className="px-8">
+          <header className="px-8 py-4 flex justify-between items-center">
             <Button variant="ghost" asChild>
               <Link href="/">{TITLE}</Link>
             </Button>
+            <form
+              action={async (formData: FormData) => {
+                "use server";
+
+                const keyword = encodeURIComponent(
+                  formData.get("keyword") as string
+                );
+
+                redirect(`/search?keyword=${keyword}`);
+              }}
+            >
+              <InputGroup className="max-w-96">
+                <InputGroupInput placeholder="Search..." />
+                <InputGroupAddon>
+                  <Search />
+                </InputGroupAddon>
+                <Button variant="ghost" type="submit">
+                  Search
+                </Button>
+              </InputGroup>
+            </form>
           </header>
           <main className="w-11/12 max-w-6xl mx-auto py-8">{children}</main>
           <footer className="text-center py-2 sticky top-full">
